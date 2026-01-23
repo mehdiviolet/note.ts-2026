@@ -1,3 +1,5 @@
+"use server";
+
 // actions abbiamo, lascia così, li usiamo per pagina categories
 
 import prisma from "../lib/prisma";

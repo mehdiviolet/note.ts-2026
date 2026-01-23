@@ -1,16 +1,7 @@
 "use client";
 
-import { Category } from "@prisma/client";
 import { Trash2 } from "lucide-react";
 import { deleteCategory, getCategories } from "../actions/category-actions";
-
-// type CategoryWithCount = Category & {
-//   _count: { notes: number };
-// };
-
-// type Props = {
-//   categories: CategoryWithCount[];
-// };
 
 type CategoriesProp = Awaited<ReturnType<typeof getCategories>>["data"];
 export function CategoryList({ categories }: { categories: CategoriesProp }) {
@@ -26,6 +17,9 @@ export function CategoryList({ categories }: { categories: CategoriesProp }) {
 
   return (
     <div className="space-y-2">
+      <h2 className="text-xl font-semibold mb-4">
+        Le tue categorie ({categories.length})
+      </h2>
       {categories.map((cat) => (
         <div
           key={cat.id}

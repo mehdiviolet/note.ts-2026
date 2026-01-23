@@ -16,7 +16,7 @@ import z from "zod";
 // export type NoteInput = z.infer<typeof noteSchema>;
 
 export const categorySchema = z.object({
-  name: z.string().min(1, "nome richiesto").max(50),
+  name: z.string().min(3, "more tha two words").max(50),
   color: z.string().regex(/^#[0-9A-F]{6}$/i, "Colore non valido"),
 });
 
