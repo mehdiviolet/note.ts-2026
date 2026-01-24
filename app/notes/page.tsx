@@ -1,4 +1,7 @@
+import { CategoryList } from "@/src/components/category-list";
 import Link from "next/link";
+import { getCategories } from "@/src/actions/category-actions";
+import { CategoryListReadonly } from "@/src/components/category-list-readonly";
 
 // Dati fake per ora
 const fakeNotes = [
@@ -29,14 +32,16 @@ const fakeNotes = [
   },
 ];
 
-const fakeCategories = [
-  { id: "1", name: "Tutte", color: "#6b7280" },
-  { id: "2", name: "Lavoro", color: "#3b82f6" },
-  { id: "3", name: "Personale", color: "#10b981" },
-  { id: "4", name: "Progetti", color: "#8b5cf6" },
-];
+// const fakeCategories = [
+//   { id: "1", name: "Tutte", color: "#6b7280" },
+//   { id: "2", name: "Lavoro", color: "#3b82f6" },
+//   { id: "3", name: "Personale", color: "#10b981" },
+//   { id: "4", name: "Progetti", color: "#8b5cf6" },
+// ];
 
-export default function NotesPage() {
+export default async function NotesPage() {
+  const response = await getCategories();
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
@@ -51,7 +56,7 @@ export default function NotesPage() {
 
       {/* Filtro categorie */}
       <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
-        {fakeCategories.map((cat) => (
+        {/* {fakeCategories.map((cat) => (
           <button
             key={cat.id}
             className="px-4 py-2 rounded-full border hover:bg-gray-100 whitespace-nowrap"
@@ -62,7 +67,8 @@ export default function NotesPage() {
             />
             {cat.name}
           </button>
-        ))}
+        ))} */}
+        <CategoryListReadonly categories={response.data} />
       </div>
 
       {/* Grid note */}

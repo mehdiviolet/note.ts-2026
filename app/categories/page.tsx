@@ -1,10 +1,9 @@
-// import { CategoryForm } from "@/components/category-form";
 import { getCategories } from "@/src/actions/category-actions";
 import { CategoryForm } from "@/src/components/category-form";
 import { CategoryList } from "@/src/components/category-list";
-import { Suspense } from "react";
 
-export default function CategoriesPage() {
+export default async function CategoriesPage() {
+  const response = await getCategories();
   return (
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-8">Categorie</h1>
@@ -17,15 +16,16 @@ export default function CategoriesPage() {
           </div>
         </div>
 
-        <Suspense fallback={<CategoryListSkeleton />}>
-          <CategoryData />
-        </Suspense>
+        <CategoryList
+          categories={response.data}
+          // renderActions = {()=> return "ok" ? null}
+        />
       </div>
     </div>
   );
 }
 
-function CategoryListSkeleton() {
+export function CategoryListSkeleton() {
   return (
     <div className="animate-pulse space-y-2">
       {[1, 2, 3].map((i) => (
@@ -35,10 +35,9 @@ function CategoryListSkeleton() {
   );
 }
 
-async function CategoryData() {
-  // await new Promise((res) => setTimeout(res, 2000));
-  const response = await getCategories();
-  if (!response.success) return <p>Errore!</p>;
+// export async function CategoryData() {
+//   const response = await getCategories();
+//   if (!response.success) return <p>Errore!</p>;
 
-  return <CategoryList categories={response.data} />;
-}
+//   return <CategoryList categories={response.data} />;
+// }

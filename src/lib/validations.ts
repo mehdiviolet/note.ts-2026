@@ -23,7 +23,7 @@ export const categorySchema = z.object({
 export const noteSchema = z.object({
   title: z.string().min(3, "minimus is three").max(100),
   content: z.string().min(1, "contenuto richesto"),
-  //   categoryId:
+  categoryId: z.string().min(1, "Categoria richiesta"),
   coverUrl: z
     .string()
     .optional()
